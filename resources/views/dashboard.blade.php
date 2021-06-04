@@ -8,10 +8,22 @@
     <div class="py-5">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
+                <div id="chart" style="height: 400px;"></div>
             </div>
         </div>
     </div>
+
+    @push('script')
+        <!-- Charting library -->
+        <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+        <!-- Chartisan -->
+        <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+        <!-- Your application script -->
+        <script>
+        const chart = new Chartisan({
+            el: '#chart',
+            url: "@chart('sample_chart')",
+        });
+        </script>
+    @endpush
 </x-app-layout>
