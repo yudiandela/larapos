@@ -4,13 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductCategoryController;
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::view('/', 'dashboard')->name('dashboard');
 
     Route::get('categories', [ProductCategoryController::class, 'index'])->name('product.category');
     Route::post('categories', [ProductCategoryController::class, 'store']);
