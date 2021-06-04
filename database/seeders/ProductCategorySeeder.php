@@ -14,6 +14,31 @@ class ProductCategorySeeder extends Seeder
      */
     public function run()
     {
-        ProductCategory::factory(20)->create();
+        // ProductCategory::factory(20)->create();
+        $datas = [
+            [
+                'title' => 'Minuman',
+                'slug' => 'minuman',
+                'image' => asset('images/category/minuman.svg')
+            ],
+            [
+                'title' => 'Makanan',
+                'slug' => 'makanan',
+                'image' => asset('images/category/makanan.svg')
+            ],
+            [
+                'title' => 'Snack',
+                'slug' => 'snack',
+                'image' => asset('images/category/snack.svg')
+            ],
+            [
+                'title' => 'Pakaian',
+                'slug' => 'pakaian',
+                'image' => asset('images/category/pakaian.svg')
+            ]
+        ];
+        foreach ($datas as $data) {
+            ProductCategory::create($data);
+        }
     }
 }

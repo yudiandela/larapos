@@ -98,6 +98,8 @@ class ProductCategoryTest extends TestCase
             'title' => 'Minuman'
         ]);
 
+        $response->assertSeeText('Minuman');
+
         $response->assertOk();
     }
 
@@ -108,6 +110,6 @@ class ProductCategoryTest extends TestCase
 
         $response = $this->actingAs($user)->delete('/categories/' . $category->id);
 
-        $response->assertOk();
+        $response->assertRedirect();
     }
 }

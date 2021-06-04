@@ -59,18 +59,18 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductCategory $category)
+    public function update(Request $request, ProductCategory $categories)
     {
         $request->validate([
             'title' => ['required', 'string', 'min:3']
         ]);
 
-        $title       = $request->get('title', $category->title);
-        $description = $request->get('description', $category->description);
-        $image       = $request->get('image', $category->image);
+        $title       = $request->get('title', $categories->title);
+        $description = $request->get('description', $categories->description);
+        $image       = $request->get('image', $categories->image);
 
         try {
-            $category->update([
+            $categories->update([
                 'title'       => $title,
                 'slug'        => Str::slug($title),
                 'description' => $description,
@@ -79,7 +79,7 @@ class ProductCategoryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data'    => $category
+                'data'    => $categories
             ]);
         } catch (\Throwable $th) {
             throw $th;
@@ -92,9 +92,9 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(ProductCategory $categories)
     {
-        $productCategory->delete();
+        $categories->delete();
 
         return redirect()->back()->with('success', 'Berhasil menghapus data Produk Kategori');
     }
