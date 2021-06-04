@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -75,12 +77,50 @@ class CartController extends Controller
     }
 
     /**
+     * Check all data in cart
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function checkout(Request $request)
+    {
+        $carts = Cart::get();
+
+        if (count($carts) > 0) {
+
+            DB::beginTransaction();
+
+            /** Menambahakan data penjualan */
+            $sale = Sale::create([
+                'code' => time(),
+                'data' => $carts,
+                'total' => (int) $request->cartTotal
+            ]);
+
+            /** Mengurangi data product */
+            foreach ($sale->data as $data) {
+                $product = Product::find($data->product_id);
+                $product->decrement('stock', $data->quantity);
+            }
+
+            /** Hapus data di cart */
+            $this->destroy();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Berhasil di input ke dalam data penjualan');
+        }
+
+        DB::rollback();
+        return redirect()->back()->with('success', 'Tidak ada data di dalam keranjang');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy()
     {
         DB::table('carts')->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus data keranjang');

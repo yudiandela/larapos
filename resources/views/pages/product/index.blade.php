@@ -20,9 +20,10 @@
                             <tr class="uppercase border-b-2 border-gray-200">
                                 <th class="w-1/12 py-6 text-xs font-semibold tracking-wider">#</th>
                                 <td class="w-2/12 py-6 text-xs font-semibold tracking-wider">Nama Produk</td>
-                                <td class="w-4/12 py-6 text-xs font-semibold tracking-wider">Description</td>
+                                <td class="w-2/12 py-6 text-xs font-semibold tracking-wider">Description</td>
                                 <td class="w-2/12 py-6 text-xs font-semibold tracking-wider">Beli</td>
-                                <td class="w-1/12 py-6 text-xs font-semibold tracking-wider">Jual</td>
+                                <td class="w-2/12 py-6 text-xs font-semibold tracking-wider">Jual</td>
+                                <td class="w-1/12 py-6 text-xs font-semibold tracking-wider">Stok</td>
                                 <td class="w-2/12 py-6 text-xs font-semibold tracking-wider"></td>
                             </tr>
                         </thead>
@@ -61,8 +62,11 @@
                                     <td class="text-sm bg-white border-b border-gray-200">
                                         Rp {{ number_format($product->sell, 2, ',', '.') }}
                                     </td>
+                                    <td class="text-sm bg-white border-b border-gray-200">
+                                        {{ $product->stock }}
+                                    </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                        <div class="flex justify-around">
+                                        <div class="flex justify-evenly">
                                             {{-- <form method="POST" action="{{ route('product.destroy', $product->id) }}">
                                                 @csrf
                                                 @method('delete')

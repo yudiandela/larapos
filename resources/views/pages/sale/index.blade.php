@@ -84,7 +84,14 @@
                             </x-button>
                         </form>
 
-                        <x-button>Checkout</x-button>
+                        <form method="POST" action="{{ route('cart') }}">
+                            @csrf
+                            @method('put')
+                            <input type="hidden" name="total" value="{{ $cartTotal }}">
+                            <x-button onclick="event.preventDefault(); this.closest('form').submit();">
+                                Checkout
+                            </x-button>
+                        </form>
                     </div>
                 </div>
             </div>

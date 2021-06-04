@@ -15,7 +15,11 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
+            $table->json('data');
+            $table->bigInteger('total');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
