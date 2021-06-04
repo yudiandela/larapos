@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Kategori Produk') }}
+                {{ __('Kategori') }}
             </h2>
 
-            <x-button>Tambah Kategori Produk</x-button>
+            <x-button>Tambah Kategori</x-button>
         </div>
     </x-slot>
 

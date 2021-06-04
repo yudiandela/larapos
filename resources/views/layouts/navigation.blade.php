@@ -32,10 +32,10 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('product.category')">
-                                    {{ __('Kategori Produk') }}
+                                    {{ __('Kategori') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('product')">
-                                    {{ __('Data Produk') }}
+                                    {{ __('Produk') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
