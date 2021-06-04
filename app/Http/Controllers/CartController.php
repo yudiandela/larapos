@@ -94,7 +94,7 @@ class CartController extends Controller
             $sale = Sale::create([
                 'code' => time(),
                 'data' => $carts,
-                'total' => (int) $request->cartTotal
+                'total' => (int) $request->total
             ]);
 
             /** Mengurangi data product */
