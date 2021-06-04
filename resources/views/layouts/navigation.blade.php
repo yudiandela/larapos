@@ -40,6 +40,10 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
+
+                    <x-nav-link :href="route('sale')" :active="request()->routeIs('sale')">
+                        {{ __('Kasir') }}
+                    </x-nav-link>
                 </div>
             </div>
 
