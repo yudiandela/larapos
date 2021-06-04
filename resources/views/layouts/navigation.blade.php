@@ -18,9 +18,9 @@
                     <x-nav-link :href="route('product.category')" :active="request()->routeIs('product.category')">
                         {{ __('Kategori Produk') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('product')" :active="request()->routeIs('product')">
                         {{ __('Data Produk') }}
-                    </x-nav-link> --}}
+                    </x-nav-link>
                 </div>
             </div>
 
