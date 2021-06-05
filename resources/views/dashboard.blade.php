@@ -7,7 +7,7 @@
 
     <div class="py-5">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="pt-10 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <div class="py-10 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div id="chart" style="height: 400px;"></div>
             </div>
         </div>
@@ -23,10 +23,40 @@
         const chart = new Chartisan({
             el: '#chart',
             url: "@chart('dashboard_chart')",
+            loader: {
+                color: '#6699CC',
+                size: [30, 30],
+                type: 'bar',
+                textColor: '#000000',
+                text: 'Mengambil data penjualan',
+            },
+            error: {
+                color: '#6699CC',
+                size: [30, 30],
+                text: 'Upps...Sepertinya ada kesalahan!',
+                textColor: '#000000',
+                type: 'general'
+            },
             hooks: new ChartisanHooks()
                 .legend()
-                .colors()
-                .tooltip(),
+                .colors(['#6699CC', '#e63946', '#00b4d8', '#e9c46a'])
+                .legend({ bottom: 0 })
+                .title({
+                    textAlign: 'center',
+                    left: '50%',
+                    text: 'Grafik data penjualan 30 hari',
+                })
+                .tooltip()
+                .datasets([
+                    {
+                        type: 'line',
+                        smooth: true,
+                        lineStyle: { width: 3 },
+                        symbolSize: 8,
+                        animationEasing: 'cubicInOut',
+                    },
+                    'bar'
+                ]),
         });
         </script>
     @endpush
