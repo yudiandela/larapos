@@ -10,7 +10,7 @@ use Chartisan\PHP\Chartisan;
 use Illuminate\Http\Request;
 use ConsoleTVs\Charts\BaseChart;
 
-class SampleChart extends BaseChart
+class DashboardChart extends BaseChart
 {
     /**
      * Handles the HTTP request for the given chart.

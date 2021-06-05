@@ -22,7 +22,7 @@
         <script>
         const chart = new Chartisan({
             el: '#chart',
-            url: "@chart('sample_chart')",
+            url: "@chart('dashboard_chart')",
         });
         </script>
     @endpush
