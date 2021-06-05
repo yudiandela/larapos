@@ -30,6 +30,6 @@ class DashboardChart extends BaseChart
         }
 
         return Chartisan::build()->labels($days)
-            ->dataset('Sample', $sales);
+            ->dataset('Penjualan', $sales);
     }
 }

@@ -7,7 +7,7 @@
 
     <div class="py-5">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <div class="pt-10 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div id="chart" style="height: 400px;"></div>
             </div>
         </div>
@@ -23,6 +23,10 @@
         const chart = new Chartisan({
             el: '#chart',
             url: "@chart('dashboard_chart')",
+            hooks: new ChartisanHooks()
+                .legend()
+                .colors()
+                .tooltip(),
         });
         </script>
     @endpush
