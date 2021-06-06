@@ -8,7 +8,13 @@
     <div class="py-5">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="py-10 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div id="chart" style="height: 400px;"></div>
+                <select class="relative z-50 border rounded-lg cursor-pointer left-14" onchange="update(this)">
+                    <option value="1">Hari ini</option>
+                    <option value="7" selected>7 Hari</option>
+                    <option value="14">2 Minggu</option>
+                    <option value="30">Bulan Ini</option>
+                </select>
+                <div id="chart" style="height: 430px;"></div>
             </div>
         </div>
     </div>
@@ -44,10 +50,31 @@
                 .title({
                     textAlign: 'center',
                     left: '50%',
-                    text: 'Grafik data penjualan 7 hari'  ,
+                    text: 'Grafik data penjualan 7 hari',
                 })
                 .tooltip()
         });
+
+        window.update = function(data) {
+            const count = data.value
+            let url = `@chart('dashboard_chart', 'count=:count')`
+            url = url.replace(':count', count)
+
+            chart.update({
+                background: true,
+                url: url,
+                hooks: new ChartisanHooks()
+                    .legend()
+                    .colors(['#6699CC', '#e63946', '#e9c46a', '#00b4d8'])
+                    .legend({ bottom: 0 })
+                    .title({
+                        textAlign: 'center',
+                        left: '50%',
+                        text: `Grafik data penjualan ${count} hari`,
+                    })
+                    .tooltip()
+                })
+        }
         </script>
     @endpush
 </x-app-layout>
