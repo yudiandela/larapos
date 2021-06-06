@@ -6,6 +6,7 @@ namespace App\Charts;
 
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleProduct;
 use Chartisan\PHP\Chartisan;
 use Illuminate\Http\Request;
 use ConsoleTVs\Charts\BaseChart;
@@ -23,13 +24,25 @@ class DashboardChart extends BaseChart
 
         $days = [];
         $sales = [];
+        $saleByProducts = [];
+
+        $products = Product::get();
         for ($i = 0; $i <= 29; $i++) {
             $sales[] = (int) Sale::whereDate('created_at', $now->format('Y-m-d'))->sum('total');
+            foreach ($products as $product) {
+                $saleByProducts[$i][$product->slug] = (int) SaleProduct::where('product_id', $product->id)->whereDate('created_at', $now->format('Y-m-d'))->sum('total_price');
+            }
             $days[]  = $now->translatedFormat('d F');
             $now->addDay();
         }
 
-        return Chartisan::build()->labels($days)
+        $chart = Chartisan::build()->labels($days)
             ->dataset('Penjualan', $sales);
+
+        foreach ($products as $value) {
+            $chart->dataset($value->name, collect($saleByProducts)->pluck($value->slug)->toArray());
+        }
+
+        return $chart;
     }
 }

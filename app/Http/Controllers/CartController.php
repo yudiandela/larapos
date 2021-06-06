@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,10 +98,19 @@ class CartController extends Controller
                 'total' => (int) $request->total
             ]);
 
-            /** Mengurangi data product */
+            /** Looping data penjualan */
             foreach ($sale->data as $data) {
                 $product = Product::find($data->product_id);
+
+                /** Mengurangi data product */
                 $product->decrement('stock', $data->quantity);
+
+                /** Masukkan ke table penjualan product */
+                SaleProduct::create([
+                    'product_id' => $data->product_id,
+                    'quantity' => $data->quantity,
+                    'total_price' => $product->sell * $data->quantity,
+                ]);
             }
 
             /** Hapus data di cart */
