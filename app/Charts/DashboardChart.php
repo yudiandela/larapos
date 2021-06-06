@@ -20,14 +20,15 @@ class DashboardChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
-        $now = now()->subDays(29);
+        $count = ((int) $request->count ?: 7) - 1;
+        $now = now()->subDays($count);
 
         $days = [];
         $sales = [];
         $saleByProducts = [];
 
         $products = Product::get();
-        for ($i = 0; $i <= 29; $i++) {
+        for ($i = 0; $i <= $count; $i++) {
             $sales[] = (int) Sale::whereDate('created_at', $now->format('Y-m-d'))->sum('total');
             foreach ($products as $product) {
                 $saleByProducts[$i][$product->slug] = (int) SaleProduct::where('product_id', $product->id)->whereDate('created_at', $now->format('Y-m-d'))->sum('total_price');

@@ -39,24 +39,14 @@
             },
             hooks: new ChartisanHooks()
                 .legend()
-                .colors(['#6699CC', '#e63946', '#00b4d8', '#e9c46a'])
+                .colors(['#6699CC', '#e63946', '#e9c46a', '#00b4d8'])
                 .legend({ bottom: 0 })
                 .title({
                     textAlign: 'center',
                     left: '50%',
-                    text: 'Grafik data penjualan 30 hari',
+                    text: 'Grafik data penjualan 7 hari'  ,
                 })
                 .tooltip()
-                .datasets([
-                    {
-                        type: 'line',
-                        smooth: true,
-                        lineStyle: { width: 3 },
-                        symbolSize: 8,
-                        animationEasing: 'cubicInOut',
-                    },
-                    'bar'
-                ]),
         });
         </script>
     @endpush
